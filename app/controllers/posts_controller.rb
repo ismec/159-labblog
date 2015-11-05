@@ -8,6 +8,12 @@ class PostsController < ApplicationController
 		@post = Post.new
 	end
 	def create
+		@post = Post.new(params.require(:post).permit(:title, :content))  
+		if @post.save   
+			redirect_to posts_path,:notice => "Successfully created!"  
+		else   
+			render "new"  
+		end
 	end
 	def edit
 	end 
